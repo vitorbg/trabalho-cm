@@ -43,24 +43,13 @@ public class ProdutoDAO {
         values.put(VendasDB.COLUMN_PRECO, preco);
         long insertId = database.insert(VendasDB.TABLE_PRODUTO, null, values);
     }
-// realizando leitura da nota inserida
-       // Cursor cursor = database.query(VendasDB.TABLE_PRODUTO,
-         //       columns, VendasDB.COLUMN_ID + " = " + insertId, null, null, null, null);
-        //cursor.moveToFirst();
-// criando uma Note para retornar
-       /* Produto produto = new Produto();
-        produto.setNome(cursor.getString(0));
-        produto.setDescricao(cursor.getString(1));
-        produto.setPreco(cursor.getDouble(2));
-        cursor.close();
-        return produto;
-    }*/
-/*
-    public void delete ( Nota nota ) {
-        long id = nota.getId();
-        database.delete (NotaDB.TABLE_NOTAS ,
-                NotaDB.COLUMN_ID + " = " + id , null );
-    }*/
+
+    public void delete ( Produto produto ) {
+        long id = produto.getId();
+        database.delete (VendasDB.TABLE_PRODUTO,
+                VendasDB.COLUMN_ID + " = " + id , null );
+    }
+
     public ArrayList <Produto> getAll () {
         ArrayList<Produto> itens = new ArrayList<Produto>() ;
         Cursor cursor = database . query ( VendasDB.TABLE_PRODUTO,
@@ -79,8 +68,34 @@ public class ProdutoDAO {
             System.out.println("nome: " + produto.getNome());
             System.out.println("nota: " + produto.getDescricao());
         }
-        cursor . close ();
+        cursor . close();
         return itens ;
+    }
+
+    public Produto getById(int id){
+        Produto resultado = null;
+        ArrayList<Produto> itens = new ArrayList<Produto>() ;
+        Cursor cursor = database . query ( VendasDB.TABLE_PRODUTO,
+                columns, null , null , null , null , null );
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Produto produto = new Produto();
+            produto.setId(cursor.getInt(0));
+            produto.setNome(cursor.getString(1));
+            produto.setDescricao(cursor.getString(2));
+            produto.setPreco(cursor.getDouble(3));
+            if(produto.getId() == id){
+                resultado = produto;
+            }
+            itens.add(produto);
+            cursor.moveToNext();
+
+            System.out.println("id: " + produto.getId());
+            System.out.println("nome: " + produto.getNome());
+            System.out.println("nota: " + produto.getDescricao());
+        }
+        cursor . close ();
+        return resultado;
     }
 
 

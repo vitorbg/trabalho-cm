@@ -32,6 +32,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:focusable="false"
- />
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAIR"
+        android:id="@+id/btnMainSair"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/imgBtnSair"
+        android:layout_toEndOf="@+id/imgBtnSair" />
 
 </RelativeLayout>

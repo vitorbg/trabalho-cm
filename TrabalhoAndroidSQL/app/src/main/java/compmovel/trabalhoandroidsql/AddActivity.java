@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import java.sql.SQLException;
 
+import compmovel.trabalhoandroidsql.persistencia.Produto;
 import compmovel.trabalhoandroidsql.persistencia.ProdutoDAO;
 
 public class AddActivity extends AppCompatActivity {
@@ -19,6 +20,9 @@ public class AddActivity extends AppCompatActivity {
     private EditText edtDescricao;
     private EditText edtPreco;
     private Button btnAdiciona;
+    private int id;
+    private boolean altera;
+    private Produto produto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,27 @@ public class AddActivity extends AppCompatActivity {
         edtDescricao = (EditText) this.findViewById(R.id.editTextDescricao);
         edtPreco = (EditText) this.findViewById(R.id.editTextPreco);
         btnAdiciona = (Button) this.findViewById(R.id.btnAdiciona);
+
+        Bundle extras = getIntent().getExtras();
+        id = extras.getInt("id");
+        altera = extras.getBoolean("altera");
+
+        if (altera == true){
+
+            ProdutoDAO produtoDAO = new ProdutoDAO(this);
+            try {
+                produtoDAO.open();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            produto = produtoDAO.getById(id);
+            produtoDAO.close();
+            edtNome.setText(produto.getNome());
+            edtDescricao.setText(produto.getDescricao());
+            edtPreco.setText(String.valueOf(produto.getPreco()));
+
+        }
+
 
         btnAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +71,14 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void insere(View v) throws SQLException {
+
+        if(altera==true){
+            ProdutoDAO produtoDAO = new ProdutoDAO(this);
+            produtoDAO.open();
+            produtoDAO.delete(produto);
+            produtoDAO.close();
+        }
+
         String nome = edtNome.getText().toString();
         String descricao = edtDescricao.getText().toString();
         Double preco = Double.valueOf(edtPreco.getText().toString());

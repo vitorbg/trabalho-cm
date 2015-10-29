@@ -6,4 +6,6 @@
     <string name="activity_adiciona">adiciona</string>
     <string name="title_activity_adiciona">AdicionaActivity</string>
     <string name="title_activity_add">AddActivity</string>
+    <string name="title_activity_mostra_produto">MostraProdutoActivity</string>
+    <string name="title_activity_produto">ProdutoActivity</string>
 </resources>

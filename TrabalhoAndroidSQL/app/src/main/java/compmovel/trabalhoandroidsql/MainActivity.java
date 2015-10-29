@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import compmovel.trabalhoandroidsql.persistencia.ProdutoDAO;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ImageButton btnAdicionar;
+    private Button btnSair;
     private ListView listView;
     private AdapterListView adapterListView;
     private ArrayList<Produto> itens;
@@ -32,12 +34,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
         btnAdicionar = (ImageButton) this.findViewById(R.id.imgBtnAdicionar);
+        btnSair = (Button) this.findViewById(R.id.btnMainSair);
 
 
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chamaTelaAdiciona(v);
+            }
+
+        });
+
+        btnSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                System.exit(0);
             }
 
         });
@@ -61,18 +73,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ArrayList<Produto> all = produtoDAO.getAll();
         produtoDAO.close();
 
-
-
-        Produto item1 = new Produto(1,"Pão", "Pão Frances", 50);
-        Produto item2 = new Produto(2,"Pão", "Pão Italiano", 32);
-        Produto item3 = new Produto(3,"Pão", "Pão Doce", 56);
-        Produto item4 = new Produto(4,"Pão", "Pão Brasileiro", 20);
-
-        itens.add(item1);
-        itens.add(item2);
-        itens.add(item3);
-        itens.add(item4);
-
         //Cria o adapter
         adapterListView = new AdapterListView(this, all);
 
@@ -89,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         //Pega o item que foi selecionado.
         Produto item = adapterListView.getItem(arg2);
+
+        Intent intent = new Intent(this,ProdutoActivity.class);
+
+        intent.putExtra("id",item.getId());
+        this.startActivity(intent);
+
         //Demostração
         Toast.makeText(this, "Você Clicou em: " + item.getNome() +" - "+ item.getDescricao(), Toast.LENGTH_LONG).show();
     }
@@ -96,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void chamaTelaAdiciona(View v){
         Intent intent = new Intent(this,AddActivity.class);
+
+        intent.putExtra("altera",false);
         this.startActivity(intent);
     }
 
