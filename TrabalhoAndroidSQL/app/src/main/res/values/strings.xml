@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">TrabalhoAndroidSQL</string>
-
+    <string name="app_name">Produtos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="novo_produto">Novo</string>
+    <string name="fornecedores">Fornecedores</string>
+    <string name="sair_app">Sair</string>
     <string name="activity_adiciona">adiciona</string>
     <string name="title_activity_adiciona">AdicionaActivity</string>
-    <string name="title_activity_add">AddActivity</string>
-    <string name="title_activity_mostra_produto">MostraProdutoActivity</string>
+    <string name="title_activity_add">Cadastrar</string>
+    <string name="title_activity_mostra_produto">Produto</string>
     <string name="title_activity_produto">ProdutoActivity</string>
+    <string name="title_activity_fornecedores">Fornecedores</string>
 </resources>

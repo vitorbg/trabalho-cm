@@ -9,19 +9,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
+import compmovel.trabalhoandroidsql.adapterlistview.AdapterListView;
 import compmovel.trabalhoandroidsql.persistencia.Produto;
 import compmovel.trabalhoandroidsql.persistencia.ProdutoDAO;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    private EditText editTextPesquisaProduto;
     private ImageButton btnAdicionar;
     private Button btnSair;
     private ListView listView;
@@ -33,27 +35,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        btnAdicionar = (ImageButton) this.findViewById(R.id.imgBtnAdicionar);
-        btnSair = (Button) this.findViewById(R.id.btnMainSair);
 
-
-        btnAdicionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chamaTelaAdiciona(v);
-            }
-
-        });
-
-        btnSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                System.exit(0);
-            }
-
-        });
-
+        editTextPesquisaProduto = (EditText) this.findViewById(R.id.editTextPesquisaProduto);
 
         //Define o Listener quando alguem clicar no item.
         listView.setOnItemClickListener(this);
@@ -83,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listView.setCacheColorHint(Color.TRANSPARENT);
 
 
-
     }
+
 
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         //Pega o item que foi selecionado.
@@ -96,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.startActivity(intent);
 
         //Demostração
-        Toast.makeText(this, "Você Clicou em: " + item.getNome() +" - "+ item.getDescricao(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Você Clicou em: " + item.getNome() + " - " + item.getDescricao(), Toast.LENGTH_LONG).show();
     }
 
 
@@ -127,6 +110,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.novo_produto) {
+            Intent intent = new Intent(this,AddActivity.class);
+            intent.putExtra("altera",false);
+            this.startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.fornecedores) {
+            Intent intent = new Intent(this,FornecedoresActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.sair_app) {
+            System.exit(1);
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

@@ -1,4 +1,4 @@
-package compmovel.trabalhoandroidsql;
+package compmovel.trabalhoandroidsql.adapterlistview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import compmovel.trabalhoandroidsql.R;
+import compmovel.trabalhoandroidsql.persistencia.Fornecedor;
 import compmovel.trabalhoandroidsql.persistencia.Produto;
 
 /**
@@ -26,6 +28,7 @@ public class AdapterListView extends BaseAdapter {
         //responsavel por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
     }
+
 
     /**
      * Retorna a quantidade de itens

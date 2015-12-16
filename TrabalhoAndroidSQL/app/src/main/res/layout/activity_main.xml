@@ -11,17 +11,7 @@
         android:id="@+id/listView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/imgBtnAdicionar" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgBtnAdicionar"
-        android:src="@drawable/add"
-        android:scaleType="fitXY"
-        android:layout_alignTop="@+id/imgBtnSair"
-        android:layout_toLeftOf="@+id/imgBtnSair"
-        android:layout_toStartOf="@+id/imgBtnSair" />
+        android:layout_below="@+id/editTextPesquisaProduto" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -34,13 +24,14 @@
         android:focusable="false"
         android:visibility="invisible" />
 
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SAIR"
-        android:id="@+id/btnMainSair"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/imgBtnSair"
-        android:layout_toEndOf="@+id/imgBtnSair" />
+        android:id="@+id/editTextPesquisaProduto"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

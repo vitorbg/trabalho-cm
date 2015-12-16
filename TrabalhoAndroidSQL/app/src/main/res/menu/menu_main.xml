@@ -1,6 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/novo_produto"
+        android:title="@string/novo_produto"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/fornecedores"
+        android:title="@string/fornecedores"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/sair_app"
+        android:title="@string/sair_app"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>
