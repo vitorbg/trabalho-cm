@@ -18,7 +18,8 @@ public class ProdutoDAO {
     private String[] columns = {VendasDB.COLUMN_ID,
             VendasDB.COLUMN_NOME,
             VendasDB.COLUMN_DESCRICAO,
-            VendasDB.COLUMN_PRECO};
+            VendasDB.COLUMN_PRECO,
+            VendasDB.COLUMN_FOTO};
 
     private VendasDB sqliteOpenHelper;
 
@@ -34,13 +35,14 @@ public class ProdutoDAO {
         sqliteOpenHelper.close();
     }
 
-    public void create(String nome, String descricao, double preco) {
+    public void create(String nome, String descricao, double preco, String foto) {
         ContentValues values = new ContentValues();
 
 // inserindo na tabela
         values.put(VendasDB.COLUMN_NOME, nome);
         values.put(VendasDB.COLUMN_DESCRICAO, descricao);
         values.put(VendasDB.COLUMN_PRECO, preco);
+        values.put(VendasDB.COLUMN_FOTO, foto);
         long insertId = database.insert(VendasDB.TABLE_PRODUTO, null, values);
     }
 
@@ -61,6 +63,7 @@ public class ProdutoDAO {
             produto.setNome(cursor.getString(1));
             produto.setDescricao(cursor.getString(2));
             produto.setPreco(cursor.getDouble(3));
+            produto.setFoto(cursor.getString(4));
             itens.add(produto);
             cursor.moveToNext();
 
@@ -84,6 +87,7 @@ public class ProdutoDAO {
             produto.setNome(cursor.getString(1));
             produto.setDescricao(cursor.getString(2));
             produto.setPreco(cursor.getDouble(3));
+            produto.setFoto(cursor.getString(4));
             if(produto.getId() == id){
                 resultado = produto;
             }
@@ -93,6 +97,8 @@ public class ProdutoDAO {
             System.out.println("id: " + produto.getId());
             System.out.println("nome: " + produto.getNome());
             System.out.println("nota: " + produto.getDescricao());
+            System.out.println("foto: " + produto.getFoto());
+
         }
         cursor . close ();
         return resultado;

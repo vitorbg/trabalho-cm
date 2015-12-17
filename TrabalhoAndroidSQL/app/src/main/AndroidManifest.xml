@@ -35,7 +35,8 @@
             android:name=".Fornecedores"
             android:label="@string/title_activity_fornecedores"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FornecedoresActivity"></activity>
+        <activity android:name=".FornecedoresActivity" />
+        <activity android:name=".ServidorActivity"></activity>
     </application>
 
 </manifest>

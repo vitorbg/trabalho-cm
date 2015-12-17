@@ -79,7 +79,7 @@ public class AdapterListViewFornecedores extends BaseAdapter {
         //atravez do layout pego pelo LayoutInflater, pegamos cada id relacionado
         //ao item e definimos as informações.
         ((TextView) view.findViewById(R.id.textView6)).setText(item.getNome());
-        ((TextView) view.findViewById(R.id.textView7)).setText(item.getTelefone());
+        ((TextView) view.findViewById(R.id.textView7)).setText("Telefone: "+item.getTelefone());
 
 
 
@@ -87,4 +87,5 @@ public class AdapterListViewFornecedores extends BaseAdapter {
 
         return view;
     }
+
 }

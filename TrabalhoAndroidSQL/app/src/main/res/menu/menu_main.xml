@@ -22,6 +22,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/servidor"
+        android:title="@string/servidor"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/sair_app"
         android:title="@string/sair_app"
         android:orderInCategory="100"

@@ -1,6 +1,9 @@
 package compmovel.trabalhoandroidsql;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.sql.SQLException;
@@ -21,6 +25,7 @@ public class ProdutoActivity extends AppCompatActivity {
     TextView txtViewNome;
     TextView txtViewDescricao;
     TextView txtViewPreco;
+    ImageView ivProduto;
     Button btnApagar;
     Button btnAlterar;
     int id;
@@ -37,6 +42,7 @@ public class ProdutoActivity extends AppCompatActivity {
         txtViewPreco = (TextView) this.findViewById(R.id.textViewProdutoPreco);
         btnApagar = (Button) this.findViewById(R.id.btnProdutoDeletar);
         btnAlterar = (Button) this.findViewById(R.id.btnProdutoAlterar);
+        ivProduto = (ImageView) this.findViewById(R.id.imageViewProduto);
 
 
         ProdutoDAO produtoDAO = new ProdutoDAO(this);
@@ -51,7 +57,10 @@ public class ProdutoActivity extends AppCompatActivity {
         txtViewNome.setText(produto.getNome());
         txtViewDescricao.setText(produto.getDescricao());
         txtViewPreco.setText(String.valueOf(produto.getPreco()));
-
+   /*     if (produto.getFoto() != null || produto.getFoto() != " ") {
+            carregarFoto(produto.getFoto());
+            System.out.println("TO TENTANDO CARREGAR A FOTO !!");
+        }*/
         btnApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +109,14 @@ public class ProdutoActivity extends AppCompatActivity {
 
 
         this.startActivity(intent);
+    }
+
+    public void carregarFoto(String localFoto){
+        Bitmap imagemFoto = BitmapFactory.decodeFile(localFoto);
+
+        Bitmap imagemFotoReduzida = Bitmap.createScaledBitmap(imagemFoto,100,100,true);
+
+        ivProduto.setImageBitmap(imagemFotoReduzida);
     }
 
     @Override

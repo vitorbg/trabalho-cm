@@ -123,6 +123,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return true;
         }
 
+        if (id == R.id.servidor) {
+            Intent intent = new Intent(this,ServidorActivity.class);
+            this.startActivity(intent);
+            return true;
+        }
+
         if (id == R.id.sair_app) {
             System.exit(1);
             return true;

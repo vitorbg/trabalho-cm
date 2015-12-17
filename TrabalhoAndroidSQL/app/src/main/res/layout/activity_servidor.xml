@@ -7,24 +7,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="compmovel.trabalhoandroidsql.FornecedoresActivity">
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listViewFornecedores"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/buttonLigarFornecedorDois" />
+    tools:context="compmovel.trabalhoandroidsql.ServidorActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ligar"
-        android:id="@+id/buttonLigarFornecedorDois"
+        android:text="Verificar Status"
+        android:id="@+id/buttonStatusServidor"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OFFLINE"
+        android:id="@+id/textViewStatusServidor"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="60dp" />
 </RelativeLayout>

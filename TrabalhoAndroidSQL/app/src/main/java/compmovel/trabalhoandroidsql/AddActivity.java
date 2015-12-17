@@ -1,6 +1,9 @@
 package compmovel.trabalhoandroidsql;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.File;
 import java.sql.SQLException;
 
 import compmovel.trabalhoandroidsql.persistencia.Produto;
@@ -20,9 +24,11 @@ public class AddActivity extends AppCompatActivity {
     private EditText edtDescricao;
     private EditText edtPreco;
     private Button btnAdiciona;
+    private Button btnFoto;
     private int id;
     private boolean altera;
     private Produto produto;
+    private String localFoto = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class AddActivity extends AppCompatActivity {
         edtDescricao = (EditText) this.findViewById(R.id.editTextDescricao);
         edtPreco = (EditText) this.findViewById(R.id.editTextPreco);
         btnAdiciona = (Button) this.findViewById(R.id.btnAdiciona);
+        btnFoto = (Button) this.findViewById(R.id.buttonTiraFoto);
 
         Bundle extras = getIntent().getExtras();
         id = extras.getInt("id");
@@ -53,7 +60,13 @@ public class AddActivity extends AppCompatActivity {
             edtPreco.setText(String.valueOf(produto.getPreco()));
 
         }
+        btnFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            tiraFoto(v);
+            }
 
+        });
 
         btnAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +83,18 @@ public class AddActivity extends AppCompatActivity {
 
     }
 
+    private void tiraFoto(View v){
+        localFoto = Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + ".jpg";
+        File arquivo = new File(localFoto);
+
+        Uri local = Uri.fromFile(arquivo);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,localFoto);
+
+        startActivity(intent);
+    }
+
     private void insere(View v) throws SQLException {
 
         if(altera==true){
@@ -82,10 +107,11 @@ public class AddActivity extends AppCompatActivity {
         String nome = edtNome.getText().toString();
         String descricao = edtDescricao.getText().toString();
         Double preco = Double.valueOf(edtPreco.getText().toString());
+        String foto = localFoto;
 
         ProdutoDAO produtoDAO = new ProdutoDAO(this);
         produtoDAO.open();
-        produtoDAO.create(nome, descricao, preco);
+        produtoDAO.create(nome, descricao, preco,foto);
         produtoDAO.getAll();
         produtoDAO.close();
 

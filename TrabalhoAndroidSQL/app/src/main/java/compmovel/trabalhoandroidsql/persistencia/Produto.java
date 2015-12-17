@@ -8,22 +8,25 @@ public class Produto {
     private String nome;
     private String descricao;
     private double preco;
+    private String foto;
 
-    public Produto(int id, String nome, String descricao, double preco) {
+    public Produto(int id, String nome, String descricao, double preco, String foto) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        this.foto = foto;
     }
 
     public Produto(){
 
     }
 
-    public Produto(String nome, String descricao, double preco) {
+    public Produto(String nome, String descricao, double preco, String foto) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        this.foto = foto;
     }
 
     public int getId() {
@@ -56,5 +59,13 @@ public class Produto {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
