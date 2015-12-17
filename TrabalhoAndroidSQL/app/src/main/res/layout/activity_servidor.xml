@@ -28,4 +28,14 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textSize="60dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Internet OFFLINE"
+        android:id="@+id/textViewInternet"
+        android:layout_below="@+id/textViewStatusServidor"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:textSize="30dp" />
 </RelativeLayout>
