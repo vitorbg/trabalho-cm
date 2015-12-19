@@ -46,9 +46,6 @@ public class ComunicacaoServidor extends IntentService {
         if(isOnline()) {
             textViewInternet.setText("INTERNET ONLINE");
 
-
-
-
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             try {
