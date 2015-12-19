@@ -21,6 +21,7 @@ public class StatusResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getStatus() {
+        System.out.println("Chegou Requisição !!!!!");
         return "s";
     }
 }

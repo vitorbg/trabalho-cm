@@ -1,5 +1,6 @@
-package compmovel.trabalhoandroidsql;
+package compmovel.trabalhoandroidsql.thread;
 
+import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,40 +13,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 import java.io.IOException;
 
+import compmovel.trabalhoandroidsql.R;
 import compmovel.trabalhoandroidsql.rest.StatusRest;
-import compmovel.trabalhoandroidsql.thread.ComunicacaoServidor;
 
-public class ServidorActivity extends AppCompatActivity {
+/**
+ * Created by vitor on 19/12/15.
+ */
+public class ComunicacaoServidor extends IntentService {
 
-    private Button btnStatus;
+
+    private StatusRest statusRest = new StatusRest();
+    private boolean status;
     private TextView textViewStatus;
     private TextView textViewInternet;
-    private StatusRest statusRest = new StatusRest();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_servidor);
-
-        btnStatus = (Button) this.findViewById(R.id.buttonStatusServidor);
-        textViewStatus = (TextView) this.findViewById(R.id.textViewStatusServidor);
-        textViewInternet = (TextView) this.findViewById(R.id.textViewInternet);
-
-        btnStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                trataCliqueStatus(v);
-            }
-
-        });
-
-        Intent intent = new Intent(ServidorActivity.this, ComunicacaoServidor.class);
-        startService(intent);
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public ComunicacaoServidor(String name) {
+        super(name);
     }
 
-    private void trataCliqueStatus(View v){
+
+    public void run() {
+
         boolean status = false;
         if(isOnline()) {
             textViewInternet.setText("INTERNET ONLINE");
@@ -73,7 +69,30 @@ public class ServidorActivity extends AppCompatActivity {
             textViewStatus.setText("OFFLINE");
             textViewInternet.setText("INTERNET OFFLINE");
         }
+
+
+        while(true){
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            try {
+                status = statusRest.verificaStatusServidor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
+
+
+
 
     public boolean isOnline(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -82,5 +101,10 @@ public class ServidorActivity extends AppCompatActivity {
 
         return (networkInfo != null && networkInfo.isConnected());
 
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+     run();
     }
 }

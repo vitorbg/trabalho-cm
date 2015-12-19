@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ public class AddActivity extends AppCompatActivity {
     private Button btnFoto;
     private int id;
     private boolean altera;
+    private boolean fotoTirada=false;
     private Produto produto;
     private String localFoto = null;
 
@@ -85,6 +87,9 @@ public class AddActivity extends AppCompatActivity {
 
     private void tiraFoto(View v){
         localFoto = Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + ".jpg";
+
+
+
         File arquivo = new File(localFoto);
 
         Uri local = Uri.fromFile(arquivo);
@@ -92,6 +97,8 @@ public class AddActivity extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,localFoto);
 
+        System.out.println("Local da FOTO: " + localFoto);
+        fotoTirada=true;
         startActivity(intent);
     }
 
@@ -107,7 +114,10 @@ public class AddActivity extends AppCompatActivity {
         String nome = edtNome.getText().toString();
         String descricao = edtDescricao.getText().toString();
         Double preco = Double.valueOf(edtPreco.getText().toString());
-        String foto = localFoto;
+        String foto =null;
+        if(fotoTirada=true) {
+           foto = localFoto;
+        }
 
         ProdutoDAO produtoDAO = new ProdutoDAO(this);
         produtoDAO.open();

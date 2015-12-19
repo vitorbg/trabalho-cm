@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import compmovel.trabalhoandroidsql.adapterlistview.AdapterListView;
 import compmovel.trabalhoandroidsql.persistencia.Produto;
 import compmovel.trabalhoandroidsql.persistencia.ProdutoDAO;
+import compmovel.trabalhoandroidsql.thread.ComunicacaoServidor;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 

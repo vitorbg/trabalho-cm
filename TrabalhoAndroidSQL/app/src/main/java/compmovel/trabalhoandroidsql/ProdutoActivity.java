@@ -57,10 +57,10 @@ public class ProdutoActivity extends AppCompatActivity {
         txtViewNome.setText(produto.getNome());
         txtViewDescricao.setText(produto.getDescricao());
         txtViewPreco.setText(String.valueOf(produto.getPreco()));
-   /*     if (produto.getFoto() != null || produto.getFoto() != " ") {
+        if (produto.getFoto() != null) {
             carregarFoto(produto.getFoto());
             System.out.println("TO TENTANDO CARREGAR A FOTO !!");
-        }*/
+        }
         btnApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
